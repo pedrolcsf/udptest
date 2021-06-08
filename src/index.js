@@ -3,6 +3,7 @@ const udp = require('dgram')
 const path = require('path');
 const express = require('express');
 const cors = require('cors');
+require('dotenv')
 const dbPath = path.resolve(__dirname, '..', 'db', 'udpTest.db')
 
 // Sqlite3
@@ -54,7 +55,6 @@ app.get('/udptest', (req, res) => {
         success: success2.length,
         errors: errors2.length
       })
-
     })
   })
 })
@@ -135,7 +135,7 @@ server.on('listening', () => {
 
   // sending packages every second
   setInterval(() => {
-    server.send('was?', 5009, 'localhost', (err) => err && console.log('error'));
+    server.send('was?', process.env.UDP_SEND_PORT, process.env.UDP_SEND_IP, (err) => err && console.log('error'));
     timer++
   }, 1000)
 })
