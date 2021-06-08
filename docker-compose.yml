@@ -1,0 +1,15 @@
+version: "3.7"
+
+services:
+  app:
+    build: .
+    container_name: udpTest
+    ports:
+      - 3337:3339
+    volumes:
+      - .:/usr/app
+    network_mode: host
+
+volumes:
+  pgdata:
+    driver: local
